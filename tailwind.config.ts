@@ -11,15 +11,15 @@ const config: Config = {
       colors: {
         charcoal: "#2C2C2C",
         ivory: "#F5F0E8",
-        gold: "#C5A572",
-        burgundy: "#722F37",
+        gold: "#C5A55A",
+        burgundy: "#8C3A3A",
         ivoryDark: "#EDE8DC",
         goldLight: "#D4BC91",
         charcoalLight: "#3D3D3D",
       },
       fontFamily: {
         heading: [
-          "Canela",
+          "Outfit",
           "Georgia",
           "Cambria",
           '"Times New Roman"',
@@ -27,7 +27,7 @@ const config: Config = {
           "serif",
         ],
         body: [
-          '"Neue Haas Grotesk Display Pro"',
+          '"Plus Jakarta Sans"',
           '"Helvetica Neue"',
           "Helvetica",
           "Arial",
