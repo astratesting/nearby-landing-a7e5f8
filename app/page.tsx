@@ -1,16 +1,16 @@
 import Hero from "@/components/Hero";
-import HowItWorks from "@/components/HowItWorks";
+import WhatWereBuilding from "@/components/WhatWereBuilding";
 import Waitlist from "@/components/Waitlist";
-import TrustSafety from "@/components/TrustSafety";
+import HowItWorks from "@/components/HowItWorks";
 import FAQ from "@/components/FAQ";
 
 export default function Home() {
   return (
     <main>
       <Hero />
-      <HowItWorks />
+      <WhatWereBuilding />
       <Waitlist />
-      <TrustSafety />
+      <HowItWorks />
       <FAQ />
 
       {/* Footer */}

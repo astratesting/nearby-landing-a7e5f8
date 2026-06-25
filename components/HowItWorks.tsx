@@ -3,9 +3,21 @@
 const steps = [
   {
     number: "01",
-    title: "Verify Your Address",
+    title: "ID Check",
     description:
-      "Confirm your home address and we'll verify you belong to a real neighborhood. No anonymous accounts — only actual residents.",
+      "Verify your identity with a quick government ID check. We confirm you're a real person — no bots, no fake accounts.",
+    icon: (
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="5" width="20" height="14" rx="2" />
+        <line x1="2" y1="10" x2="22" y2="10" />
+      </svg>
+    ),
+  },
+  {
+    number: "02",
+    title: "Address Verification",
+    description:
+      "Confirm your home address and we'll verify you belong to a real neighborhood. This ensures every member is an actual resident.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -14,30 +26,14 @@ const steps = [
     ),
   },
   {
-    number: "02",
-    title: "List or Browse",
-    description:
-      "Post your items with photos and a fair price, or explore what your neighbors are selling. Everything stays hyper-local.",
-    icon: (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="3" width="7" height="7" rx="1" />
-        <rect x="14" y="3" width="7" height="7" rx="1" />
-        <rect x="3" y="14" width="7" height="7" rx="1" />
-        <rect x="14" y="14" width="7" height="7" rx="1" />
-      </svg>
-    ),
-  },
-  {
     number: "03",
-    title: "Meet Locally",
+    title: "Neighborhood Badge",
     description:
-      "Arrange pickups within your neighborhood. Meet at familiar spots — your street, a local café, the park bench you both know.",
+      "Once verified, you receive your Neighborhood Badge — a visible trust marker that shows neighbors you're the real deal.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87" />
-        <path d="M16 3.13a4 4 0 010 7.75" />
+        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        <polyline points="9 12 11 14 15 10" />
       </svg>
     ),
   },
@@ -99,9 +95,9 @@ export default function HowItWorks() {
             </span>
           </div>
           <p className="text-sm leading-relaxed text-charcoal/70 font-light">
-            Every NearBy member goes through address verification before they can
-            list or purchase. This isn't a platform for anonymous strangers — it's
-            for neighbors who have a real stake in their community.
+            Our three-step verification ensures every NearBy member is a verified
+            resident with a real stake in their community. No anonymous strangers
+            — just neighbors you can trust.
           </p>
         </div>
       </div>
