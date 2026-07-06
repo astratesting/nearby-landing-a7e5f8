@@ -1,140 +1,138 @@
-'use client';
+"use client";
 
-import { Suspense, useState } from 'react';
-import { signIn } from 'next-auth/react';
-import { useRouter, useSearchParams } from 'next/navigation';
-import Link from 'next/link';
+import { useState } from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function SignupPage() {
-  return (
-    <Suspense>
-      <SignupForm />
-    </Suspense>
-  );
-}
-
-function SignupForm() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const returnTo = searchParams.get('return') || '/dashboard';
-  const [error, setError] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [neighborhood, setNeighborhood] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
-    const formData = new FormData(e.currentTarget);
 
-    const res = await fetch('/api/auth/signup', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: formData.get('name'),
-        email: formData.get('email'),
-        password: formData.get('password'),
-        neighborhood: formData.get('neighborhood'),
-      }),
+    const res = await fetch("/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, neighborhood }),
     });
 
     const data = await res.json();
+
     if (!res.ok) {
-      setError(data.error || 'Something went wrong.');
+      setError(data.error || "Something went wrong.");
       setLoading(false);
       return;
     }
 
-    const signInRes = await signIn('credentials', {
-      email: formData.get('email'),
-      password: formData.get('password'),
+    const result = await signIn("credentials", {
+      email,
+      password,
       redirect: false,
     });
 
     setLoading(false);
-    if (signInRes?.error) {
-      setError('Account created but sign-in failed. Please try logging in.');
+
+    if (result?.error) {
+      setError("Account created but sign-in failed. Please try logging in.");
     } else {
-      router.push(returnTo);
+      router.push("/dashboard");
       router.refresh();
     }
   }
 
   return (
-    <div className="min-h-screen flex">
-      <div className="hidden lg:flex lg:w-1/2 bg-charcoal items-center justify-center p-12">
-        <div className="max-w-sm text-center">
-          <Link href="/" className="heading-serif text-4xl text-ivory block mb-6">NearBy</Link>
-          <p className="text-ivory/60 text-sm leading-relaxed">
-            Join your neighbors. List what you have. Find what you need. All within walking distance.
+    <div className="min-h-screen flex bg-warm-white">
+      <div className="hidden lg:flex lg:w-1/2 items-center justify-center p-12 relative overflow-hidden bg-gradient-to-br from-honey/5 to-violet/5">
+        <div className="relative z-10 max-w-sm text-center">
+          <Link href="/" className="font-manrope text-4xl font-bold text-product-charcoal block mb-6">
+            Near<span className="text-violet">By</span>
+          </Link>
+          <p className="text-product-charcoal/50 text-sm leading-relaxed font-source-sans">
+            Join your neighborhood marketplace. Verified, local, safe.
           </p>
         </div>
       </div>
-      <div className="w-full lg:w-1/2 bg-ivory flex items-center justify-center p-8">
+
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-sm">
-          <Link href="/" className="heading-serif text-2xl text-charcoal block mb-8 lg:hidden">NearBy</Link>
-          <h1 className="heading-serif text-3xl text-charcoal mb-2">Join NearBy.</h1>
-          <p className="text-stone text-sm mb-8">Create your account and start trading with your neighbors.</p>
+          <Link href="/" className="font-manrope text-2xl font-bold text-product-charcoal block mb-8 lg:hidden">
+            Near<span className="text-violet">By</span>
+          </Link>
+          <h1 className="font-manrope text-3xl font-bold text-product-charcoal mb-2">Create your account</h1>
+          <p className="text-product-charcoal/50 font-source-sans text-sm mb-8">Join the neighborhood marketplace.</p>
+
           {error && (
-            <div className="mb-4 px-4 py-3 border border-burgundy/30 bg-burgundy/5 text-burgundy text-sm rounded-sm">
+            <div className="mb-4 px-4 py-3 bg-coral/10 border border-coral/20 text-coral text-sm rounded-xl font-source-sans">
               {error}
             </div>
           )}
+
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-stone mb-1.5">Full name</label>
+              <label className="block text-sm font-medium text-product-charcoal mb-1.5 font-manrope">Full Name</label>
               <input
-                name="name"
                 type="text"
                 required
-                className="w-full px-4 py-3 bg-cream border border-mist rounded-sm text-charcoal text-sm focus:border-gold focus:ring-1 focus:ring-gold/20 outline-none transition-colors"
-                placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                className="w-full px-4 py-3 bg-white border border-product-charcoal/10 rounded-xl text-product-charcoal text-sm font-source-sans focus:border-violet focus:ring-2 focus:ring-violet/10 outline-none transition-all placeholder:text-product-charcoal/25"
+                placeholder="Jordan Rivera"
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-wider text-stone mb-1.5">Email</label>
+              <label className="block text-sm font-medium text-product-charcoal mb-1.5 font-manrope">Email</label>
               <input
-                name="email"
                 type="email"
                 required
-                className="w-full px-4 py-3 bg-cream border border-mist rounded-sm text-charcoal text-sm focus:border-gold focus:ring-1 focus:ring-gold/20 outline-none transition-colors"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 bg-white border border-product-charcoal/10 rounded-xl text-product-charcoal text-sm font-source-sans focus:border-violet focus:ring-2 focus:ring-violet/10 outline-none transition-all placeholder:text-product-charcoal/25"
                 placeholder="you@example.com"
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-wider text-stone mb-1.5">Password</label>
+              <label className="block text-sm font-medium text-product-charcoal mb-1.5 font-manrope">Password</label>
               <input
-                name="password"
                 type="password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 bg-white border border-product-charcoal/10 rounded-xl text-product-charcoal text-sm font-source-sans focus:border-violet focus:ring-2 focus:ring-violet/10 outline-none transition-all placeholder:text-product-charcoal/25"
+                placeholder="Min. 6 characters"
                 minLength={6}
-                className="w-full px-4 py-3 bg-cream border border-mist rounded-sm text-charcoal text-sm focus:border-gold focus:ring-1 focus:ring-gold/20 outline-none transition-colors"
-                placeholder="At least 6 characters"
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-wider text-stone mb-1.5">Neighborhood</label>
+              <label className="block text-sm font-medium text-product-charcoal mb-1.5 font-manrope">Neighborhood (optional)</label>
               <input
-                name="neighborhood"
                 type="text"
-                required
-                className="w-full px-4 py-3 bg-cream border border-mist rounded-sm text-charcoal text-sm focus:border-gold focus:ring-1 focus:ring-gold/20 outline-none transition-colors"
-                placeholder="e.g. Bushwick, Park Slope"
+                value={neighborhood}
+                onChange={(e) => setNeighborhood(e.target.value)}
+                className="w-full px-4 py-3 bg-white border border-product-charcoal/10 rounded-xl text-product-charcoal text-sm font-source-sans focus:border-violet focus:ring-2 focus:ring-violet/10 outline-none transition-all placeholder:text-product-charcoal/25"
+                placeholder="e.g. Bushwick, Williamsburg"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 bg-gold text-white text-sm font-medium rounded-sm transition-colors duration-150 hover:bg-gold/90 disabled:opacity-50"
+              className="w-full py-3 bg-violet text-white text-sm font-semibold font-manrope rounded-xl transition-colors hover:bg-violet/90 disabled:opacity-50"
             >
-              {loading ? 'Creating account...' : 'Create account'}
+              {loading ? "Creating account..." : "Create account"}
             </button>
           </form>
-          <p className="mt-4 text-xs text-stone/50 text-center">
-            Skip the email step — we never sell your address.
-          </p>
-          <p className="mt-6 text-center text-sm text-stone">
-            Already a member?{' '}
-            <Link href="/login" className="text-gold hover:text-gold/80 transition-colors">
+
+          <p className="mt-6 text-center text-sm text-product-charcoal/50 font-source-sans">
+            Already have an account?{" "}
+            <Link href="/login" className="text-violet font-medium hover:text-violet/80 transition-colors">
               Sign in
             </Link>
           </p>

@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // Landing page (ivory theme)
         charcoal: "#2C2C2C",
         ivory: "#F5F0E8",
         gold: "#C5A55A",
@@ -16,6 +17,26 @@ const config: Config = {
         ivoryDark: "#EDE8DC",
         goldLight: "#D4BC91",
         charcoalLight: "#3D3D3D",
+        // Dashboard (dark analytical theme)
+        ink: "#0a0a0f",
+        "ink-light": "#13132b",
+        "indigo-dark": "#4f46e5",
+        cyan: "#06b6d4",
+        teal: "#14b8a6",
+        "teal-glow": "#00f0c8",
+        // Landing page v2 (dark analytical)
+        "nearby-primary": "#0A0E1A",
+        "nearby-secondary": "#EC4899",
+        "nearby-accent": "#00C8A0",
+        "nearby-bg": "#030712",
+        "nearby-surface": "#111827",
+        "nearby-border": "#1F2937",
+        "nearby-highlight": "#F2A900",
+        violet: "#7C3AED",
+        coral: "#F97066",
+        honey: "#F59E0B",
+        "warm-white": "#FFF8F0",
+        "product-charcoal": "#1F2937",
       },
       fontFamily: {
         heading: [
@@ -33,6 +54,10 @@ const config: Config = {
           "Arial",
           "sans-serif",
         ],
+        grotesk: ['"Space Grotesk"', "sans-serif"],
+        mono: ['"JetBrains Mono"', "monospace"],
+        manrope: ['"Manrope"', "sans-serif"],
+        "source-sans": ['"Source Sans 3"', "sans-serif"],
       },
       fontSize: {
         "hero": ["5rem", { lineHeight: "1.05", letterSpacing: "-0.02em" }],
