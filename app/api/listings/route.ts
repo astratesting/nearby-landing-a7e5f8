@@ -1,34 +1,34 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-
-const VALID_CATEGORIES = ["ELECTRONICS", "FURNITURE", "CLOTHING", "BABY_GEAR", "SPORTS", "BOOKS", "HOME_GARDEN", "TOYS", "VEHICLES", "OTHER"];
-const VALID_CONDITIONS = ["NEW", "LIKE_NEW", "GOOD", "FAIR"];
+import { Category, Condition } from "@prisma/client";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const category = searchParams.get("category");
+  const category = searchParams.get("category") as Category | null;
   const neighborhood = searchParams.get("neighborhood");
   const search = searchParams.get("search");
   const sort = searchParams.get("sort");
 
   const where: any = { status: "ACTIVE" };
-  if (category && VALID_CATEGORIES.includes(category)) {
+  if (category && Object.keys(Category).includes(category)) {
     where.category = category;
   }
   if (neighborhood) {
-    where.neighborhood = { contains: neighborhood };
+    where.neighborhood = { contains: neighborhood, mode: "insensitive" };
   }
   if (search) {
     where.OR = [
-      { title: { contains: search } },
-      { description: { contains: search } },
+      { title: { contains: search, mode: "insensitive" } },
+      { description: { contains: search, mode: "insensitive" } },
     ];
   }
 
-  let orderBy: any = { createdAt: "desc" };
-  if (sort === "price_asc") orderBy = { price: "asc" };
-  if (sort === "price_desc") orderBy = { price: "desc" };
+  const orderBy: any = sort === "price_asc"
+    ? { price: "asc" }
+    : sort === "price_desc"
+    ? { price: "desc" }
+    : { createdAt: "desc" };
 
   const listings = await db.listing.findMany({
     where,
@@ -58,11 +58,11 @@ export async function POST(req: Request) {
       title,
       description,
       price: Number(price),
-      category: category,
-      condition: VALID_CONDITIONS.includes(condition) ? condition : "GOOD",
+      category: category as Category,
+      condition: (condition as Condition) || "GOOD",
       neighborhood: neighborhood || "",
       imageUrl: imageUrl || null,
-      imageUrls: JSON.stringify(imageUrls || []),
+      imageUrls: imageUrls || [],
       sellerId: session.user.id,
     },
   });

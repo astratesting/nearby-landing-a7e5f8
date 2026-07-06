@@ -2,8 +2,6 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import CreateListingForm from "@/components/CreateListingForm";
 
-export const dynamic = "force-dynamic";
-
 export default async function NewListingPage() {
   const session = await auth();
   if (!session?.user?.id) redirect("/login?return=/listings/new");

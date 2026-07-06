@@ -34,39 +34,39 @@ export default function LandingFAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-24 px-6 bg-warm-white">
+    <section className="py-24 px-6 bg-[#030712]">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-14">
           <span
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-honey mb-4 block"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F2A900] mb-4 block"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             FAQ
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-product-charcoal"
-            style={{ fontFamily: "'Manrope', sans-serif" }}
+            className="text-3xl md:text-4xl font-bold text-[#F9FAFB]"
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             Honest Answers
           </h2>
-          <div className="w-12 h-[2px] bg-honey/30 mx-auto mt-6" />
+          <div className="w-12 h-[2px] bg-[#F2A900]/40 mx-auto mt-6" />
         </div>
 
         <div className="space-y-0">
           {faqs.map((faq, index) => (
-            <div key={index} className="border-b border-stone-100 last:border-b-0">
+            <div key={index} className="border-b border-[#1F2937] last:border-b-0">
               <button
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
                 className="w-full flex items-center justify-between py-5 text-left group"
                 aria-expanded={openIndex === index}
               >
                 <span
-                  className="text-base md:text-lg font-semibold text-product-charcoal group-hover:text-violet transition-colors duration-200 pr-4"
-                  style={{ fontFamily: "'Manrope', sans-serif" }}
+                  className="text-base md:text-lg font-semibold text-[#F9FAFB] group-hover:text-[#00C8A0] transition-colors duration-200 pr-4"
+                  style={{ fontFamily: "'Space Grotesk', sans-serif" }}
                 >
                   {faq.question}
                 </span>
-                <span className="flex-shrink-0 w-8 h-8 rounded-full border border-stone-200 flex items-center justify-center group-hover:border-violet/30 transition-colors">
+                <span className="flex-shrink-0 w-8 h-8 rounded-full border border-[#1F2937] flex items-center justify-center group-hover:border-[#00C8A0]/30 transition-colors">
                   <svg
                     width="14"
                     height="14"
@@ -75,7 +75,7 @@ export default function LandingFAQ() {
                     stroke="currentColor"
                     strokeWidth="1.5"
                     strokeLinecap="round"
-                    className={`text-product-charcoal/30 transition-transform duration-300 ${
+                    className={`text-[#9CA3AF] transition-transform duration-300 ${
                       openIndex === index ? 'rotate-45' : ''
                     }`}
                   >
@@ -90,8 +90,8 @@ export default function LandingFAQ() {
                 }`}
               >
                 <p
-                  className="text-sm leading-relaxed text-product-charcoal/55 pr-12"
-                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                  className="text-sm leading-relaxed text-[#9CA3AF] pr-12"
+                  style={{ fontFamily: "'DM Sans', sans-serif" }}
                 >
                   {faq.answer}
                 </p>
