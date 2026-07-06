@@ -1,34 +1,34 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { Category, Condition } from "@prisma/client";
+
+const VALID_CATEGORIES = ["ELECTRONICS", "FURNITURE", "CLOTHING", "BABY_GEAR", "SPORTS", "BOOKS", "HOME_GARDEN", "TOYS", "VEHICLES", "OTHER"];
+const VALID_CONDITIONS = ["NEW", "LIKE_NEW", "GOOD", "FAIR"];
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const category = searchParams.get("category") as Category | null;
+  const category = searchParams.get("category");
   const neighborhood = searchParams.get("neighborhood");
   const search = searchParams.get("search");
   const sort = searchParams.get("sort");
 
   const where: any = { status: "ACTIVE" };
-  if (category && Object.keys(Category).includes(category)) {
+  if (category && VALID_CATEGORIES.includes(category)) {
     where.category = category;
   }
   if (neighborhood) {
-    where.neighborhood = { contains: neighborhood, mode: "insensitive" };
+    where.neighborhood = { contains: neighborhood };
   }
   if (search) {
     where.OR = [
-      { title: { contains: search, mode: "insensitive" } },
-      { description: { contains: search, mode: "insensitive" } },
+      { title: { contains: search } },
+      { description: { contains: search } },
     ];
   }
 
-  const orderBy: any = sort === "price_asc"
-    ? { price: "asc" }
-    : sort === "price_desc"
-    ? { price: "desc" }
-    : { createdAt: "desc" };
+  let orderBy: any = { createdAt: "desc" };
+  if (sort === "price_asc") orderBy = { price: "asc" };
+  if (sort === "price_desc") orderBy = { price: "desc" };
 
   const listings = await db.listing.findMany({
     where,
@@ -58,11 +58,11 @@ export async function POST(req: Request) {
       title,
       description,
       price: Number(price),
-      category: category as Category,
-      condition: (condition as Condition) || "GOOD",
+      category: category,
+      condition: VALID_CONDITIONS.includes(condition) ? condition : "GOOD",
       neighborhood: neighborhood || "",
       imageUrl: imageUrl || null,
-      imageUrls: imageUrls || [],
+      imageUrls: JSON.stringify(imageUrls || []),
       sellerId: session.user.id,
     },
   });
