@@ -1,111 +1,86 @@
-const problems = [
-  {
-    platform: "Facebook Marketplace",
-    problem: "1 in 3 listings may be fraudulent or posted by scammers. No identity verification means anyone can create an account and post anything.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <line x1="15" y1="9" x2="9" y2="15" />
-        <line x1="9" y1="9" x2="15" y2="15" />
-      </svg>
-    ),
-  },
-  {
-    platform: "Craigslist",
-    problem: "Zero identity verification and no accountability. Transactions are completely anonymous, leaving buyers and sellers vulnerable to fraud and safety risks.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0110 0v4" />
-      </svg>
-    ),
-  },
-  {
-    platform: "OfferUp",
-    problem: 'Users frequently report account deactivation issues and limited support. Trust mechanisms are inconsistent and often rely on self-reported reviews.',
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18.36 6.64a9 9 0 11-12.73 0" />
-        <line x1="12" y1="2" x2="12" y2="12" />
-      </svg>
-    ),
-  },
-  {
-    platform: "Nextdoor",
-    problem: "Classifieds are buried in social noise — community drama, lost pet posts, and political arguments. Buying and selling isn't the core experience.",
-    icon: (
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87" />
-        <path d="M16 3.13a4 4 0 010 7.75" />
-      </svg>
-    ),
-  },
-];
-
 export default function Testimonials() {
   return (
-    <section className="py-24 px-6 bg-[#030712]">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <span
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#F2A900] mb-4 block"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
-            The Problem
-          </span>
-          <h2
-            className="text-3xl md:text-4xl font-bold text-[#F9FAFB] text-balance mb-4"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-          >
-            The Problem NearBy Solves
-          </h2>
-          <p
-            className="text-base text-[#9CA3AF] max-w-2xl mx-auto"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            Existing platforms leave you guessing. NearBy changes that — with
-            verified identity, real accountability, and no strangers.
-          </p>
-          <div className="w-12 h-[2px] bg-[#F2A900]/40 mx-auto mt-6" />
-        </div>
+    <section id="testimonials" className="py-24 px-6 bg-warm-white">
+      <div className="max-w-3xl mx-auto text-center">
+        <span
+          className="text-[11px] font-semibold tracking-[0.2em] uppercase text-honey mb-4 block"
+          style={{ fontFamily: "'Manrope', sans-serif" }}
+        >
+          Testimonials
+        </span>
+        <h2
+          className="text-3xl md:text-4xl font-bold text-product-charcoal text-balance mb-6"
+          style={{ fontFamily: "'Manrope', sans-serif" }}
+        >
+          What Neighbors Are Saying
+        </h2>
+        <p
+          className="text-base text-product-charcoal/50 max-w-xl mx-auto mb-10 leading-relaxed"
+          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+        >
+          NearBy is in pre-launch. Real stories from early adopters will appear here
+          once we go live. Until then, here&apos;s what we&apos;re building toward.
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {problems.map((p) => (
-            <div
-              key={p.platform}
-              className="rounded-2xl border border-[#1F2937] bg-[#111827] p-7 group hover:border-[#EC4899]/15 transition-all duration-300"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1F2937] border border-[#EC4899]/10 flex items-center justify-center text-[#EC4899] group-hover:border-[#EC4899]/25 transition-colors">
-                  {p.icon}
-                </div>
-                <div>
-                  <h3
-                    className="text-lg font-semibold text-[#F9FAFB] mb-2"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-                  >
-                    {p.platform}
-                  </h3>
-                  <p
-                    className="text-sm leading-relaxed text-[#9CA3AF]"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
-                  >
-                    {p.problem}
-                  </p>
-                </div>
-              </div>
+        {/* "Your story here" cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+          <div className="rounded-2xl border border-stone-100 bg-white p-8">
+            <div className="w-12 h-12 rounded-full bg-violet/5 flex items-center justify-center mx-auto mb-4">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
             </div>
-          ))}
+            <p className="text-product-charcoal/30 text-sm italic mb-4" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              &ldquo;Your story here&rdquo;
+            </p>
+            <div className="w-16 h-[2px] bg-violet/15 mx-auto" />
+          </div>
+
+          <div className="rounded-2xl border border-stone-100 bg-white p-8">
+            <div className="w-12 h-12 rounded-full bg-coral/5 flex items-center justify-center mx-auto mb-4">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F472B6" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <p className="text-product-charcoal/30 text-sm italic mb-4" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              &ldquo;Your story here&rdquo;
+            </p>
+            <div className="w-16 h-[2px] bg-coral/15 mx-auto" />
+          </div>
+
+          <div className="rounded-2xl border border-stone-100 bg-white p-8">
+            <div className="w-12 h-12 rounded-full bg-honey/5 flex items-center justify-center mx-auto mb-4">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+            </div>
+            <p className="text-product-charcoal/30 text-sm italic mb-4" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              &ldquo;Your story here&rdquo;
+            </p>
+            <div className="w-16 h-[2px] bg-honey/15 mx-auto" />
+          </div>
         </div>
 
         <p
-          className="text-center mt-10 text-[11px] text-[#9CA3AF]/40"
-          style={{ fontFamily: "'DM Sans', sans-serif" }}
+          className="text-[11px] text-product-charcoal/25"
+          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
         >
-          Honest context: NearBy has not launched yet. No customer testimonials or fabricated metrics. This is the problem we're building to solve.
+          Real stories from early adopters — coming soon. No fabricated testimonials, no fake metrics.
         </p>
+
+        {/* Trust badge callout */}
+        <div className="mt-10 inline-flex items-center gap-3 px-5 py-3 rounded-full border border-violet/15 bg-violet/5">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            <polyline points="9 12 11 14 15 10" />
+          </svg>
+          <span className="text-sm font-semibold text-violet" style={{ fontFamily: "'Manrope', sans-serif" }}>
+            Government-ID Verified Marketplace
+          </span>
+        </div>
       </div>
     </section>
   );
