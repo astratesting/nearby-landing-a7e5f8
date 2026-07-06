@@ -3,18 +3,39 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function NavbarClient() {
   const { data: session } = useSession();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [unreadCount, setUnreadCount] = useState(0);
 
   const isAppPage =
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/listings") ||
     pathname.startsWith("/profile") ||
-    pathname.startsWith("/browse");
+    pathname.startsWith("/browse") ||
+    pathname.startsWith("/messages");
+
+  useEffect(() => {
+    if (session?.user?.id && isAppPage) {
+      let interval: ReturnType<typeof setInterval>;
+      async function fetchUnread() {
+        try {
+          const res = await fetch("/api/messages");
+          const data = await res.json();
+          if (Array.isArray(data)) {
+            const count = data.reduce((sum: number, c: any) => sum + (c.unreadCount || 0), 0);
+            setUnreadCount(count);
+          }
+        } catch {}
+      }
+      fetchUnread();
+      interval = setInterval(fetchUnread, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [session, isAppPage]);
 
   async function handleSignOut() {
     await signOut({ callbackUrl: "/" });
@@ -38,6 +59,14 @@ export default function NavbarClient() {
             </Link>
             <Link href="/listings/new" className={`transition-colors duration-150 ${pathname === "/listings/new" ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"}`}>
               Sell
+            </Link>
+            <Link href="/messages" className={`relative transition-colors duration-150 ${pathname.startsWith("/messages") ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"}`}>
+              Messages
+              {unreadCount > 0 && (
+                <span className="absolute -top-2 -right-4 w-4.5 h-4.5 rounded-full bg-coral text-white text-[10px] font-bold flex items-center justify-center">
+                  {unreadCount > 9 ? "9+" : unreadCount}
+                </span>
+              )}
             </Link>
             {session?.user ? (
               <>
@@ -81,6 +110,9 @@ export default function NavbarClient() {
             </Link>
             <Link href="/listings/new" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
               Sell
+            </Link>
+            <Link href="/messages" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
+              Messages {unreadCount > 0 && `(${unreadCount})`}
             </Link>
             {session?.user ? (
               <>

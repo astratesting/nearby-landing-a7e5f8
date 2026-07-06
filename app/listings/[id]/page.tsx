@@ -147,7 +147,7 @@ export default async function ListingDetailPage({ params }: PageProps) {
             {/* Contact / Report */}
             {!isOwner && session?.user?.id && (
               <div className="space-y-3">
-                <ContactSellerButton sellerName={listing.seller.name} sellerId={listing.sellerId} />
+                <ContactSellerButton sellerName={listing.seller.name} sellerId={listing.sellerId} listingId={listing.id} />
                 <ReportButton listingId={listing.id} />
               </div>
             )}
@@ -204,10 +204,10 @@ export default async function ListingDetailPage({ params }: PageProps) {
   );
 }
 
-function ContactSellerButton({ sellerName, sellerId }: { sellerName: string; sellerId: string }) {
+function ContactSellerButton({ sellerName, sellerId, listingId }: { sellerName: string; sellerId: string; listingId: string }) {
   return (
     <Link
-      href={`/profile/${sellerId}`}
+      href={`/messages?user=${sellerId}&listing=${listingId}`}
       className="flex items-center justify-center gap-2 w-full py-3 bg-violet text-white text-sm font-semibold font-manrope rounded-xl hover:bg-violet/90 transition-colors"
     >
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

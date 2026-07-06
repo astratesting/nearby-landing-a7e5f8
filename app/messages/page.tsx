@@ -6,6 +6,10 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
+export default function MessagesPage() {
+
 interface Conversation {
   otherUser: { id: string; name: string };
   listingId: string | null;
@@ -24,7 +28,7 @@ interface Message {
   sender: { id: string; name: string };
 }
 
-export default function MessagesPage() {
+function MessagesContent() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
