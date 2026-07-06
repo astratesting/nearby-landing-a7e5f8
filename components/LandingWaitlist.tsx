@@ -60,48 +60,48 @@ export default function LandingWaitlist() {
   }
 
   return (
-    <section id="waitlist" className="py-24 px-6 bg-white relative overflow-hidden">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-violet/3 blur-[100px]" />
+    <section id="waitlist" className="py-24 px-6 bg-[#111827] relative overflow-hidden">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#00C8A0]/5 blur-[100px]" />
 
       <div className="relative z-10 max-w-2xl mx-auto text-center">
         <span
-          className="text-[11px] font-semibold tracking-[0.2em] uppercase text-violet mb-4 block"
-          style={{ fontFamily: "'Manrope', sans-serif" }}
+          className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#00C8A0] mb-4 block"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           Get Early Access
         </span>
         <h2
-          className="text-3xl md:text-4xl font-bold text-product-charcoal text-balance mb-4"
-          style={{ fontFamily: "'Manrope', sans-serif" }}
+          className="text-3xl md:text-4xl font-bold text-[#F9FAFB] text-balance mb-4"
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}
         >
           Be First in Your Neighborhood
         </h2>
         <p
-          className="text-sm leading-relaxed text-product-charcoal/50 mb-10 max-w-md mx-auto"
-          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          className="text-sm leading-relaxed text-[#9CA3AF] mb-10 max-w-md mx-auto"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
-          Join the waitlist and we&apos;ll notify you the moment NearBy launches in
+          Join the waitlist and we'll notify you the moment NearBy launches in
           your area. Early members get priority access and help shape the platform.
         </p>
 
         {status === 'success' ? (
-          <div className="p-8 rounded-2xl bg-warm-white border border-stone-100">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-violet/10 mb-4">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="p-8 rounded-2xl bg-[#030712] border border-[#00C8A0]/20">
+            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-[#00C8A0]/10 mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#00C8A0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
             <h3
-              className="text-xl font-semibold text-product-charcoal mb-2"
-              style={{ fontFamily: "'Manrope', sans-serif" }}
+              className="text-xl font-semibold text-[#F9FAFB] mb-2"
+              style={{ fontFamily: "'Space Grotesk', sans-serif" }}
             >
-              You&apos;re on the list
+              You're on the list
             </h3>
             <p
-              className="text-sm text-product-charcoal/50"
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              className="text-sm text-[#9CA3AF]"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
-              We&apos;ll notify you as soon as NearBy is ready. Keep an eye on your inbox.
+              We'll notify you as soon as NearBy is ready. Keep an eye on your inbox.
             </p>
           </div>
         ) : (
@@ -112,15 +112,15 @@ export default function LandingWaitlist() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="your@email.com"
-              className="flex-1 px-5 py-3.5 rounded-full bg-warm-white border border-stone-200 text-product-charcoal text-sm placeholder:text-product-charcoal/25 focus:outline-none focus:border-violet focus:ring-2 focus:ring-violet/10 transition-all"
+              className="flex-1 px-5 py-3.5 rounded-full bg-[#1F2937] border border-white/10 text-[#F9FAFB] text-sm placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#00C8A0]/40 focus:ring-1 focus:ring-[#00C8A0]/20 transition-all"
               disabled={status === 'submitting'}
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             />
             <button
               type="submit"
               disabled={status === 'submitting'}
-              className="px-7 py-3.5 rounded-full bg-violet text-white text-sm font-semibold tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-violet/20 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              className="px-7 py-3.5 rounded-full bg-[#00C8A0] text-[#030712] text-sm font-semibold tracking-wide transition-all duration-300 hover:shadow-lg hover:shadow-[#00C8A0]/20 hover:-translate-y-0.5 disabled:opacity-60 disabled:cursor-not-allowed whitespace-nowrap"
+              style={{ fontFamily: "'DM Sans', sans-serif" }}
             >
               {status === 'submitting' ? (
                 <span className="inline-flex items-center gap-2">
@@ -139,16 +139,16 @@ export default function LandingWaitlist() {
 
         {status === 'error' && errorMsg && (
           <p
-            className="mt-4 text-sm text-coral"
-            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+            className="mt-4 text-sm text-red-400"
+            style={{ fontFamily: "'DM Sans', sans-serif" }}
           >
             {errorMsg}
           </p>
         )}
 
         <p
-          className="mt-6 text-[11px] text-product-charcoal/30"
-          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          className="mt-6 text-[11px] text-[#9CA3AF]/50"
+          style={{ fontFamily: "'DM Sans', sans-serif" }}
         >
           No spam — just a single email when we launch in your neighborhood.
         </p>

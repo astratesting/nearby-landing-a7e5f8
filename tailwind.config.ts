@@ -33,7 +33,7 @@ const config: Config = {
         "nearby-border": "#1F2937",
         "nearby-highlight": "#F2A900",
         violet: "#7C3AED",
-        coral: "#F472B6",
+        coral: "#F97066",
         honey: "#F59E0B",
         "warm-white": "#FFF8F0",
         "product-charcoal": "#1F2937",
