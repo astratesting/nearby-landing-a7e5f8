@@ -8,6 +8,8 @@ import ReviewList from "@/components/ReviewList";
 import WriteReviewForm from "@/components/WriteReviewForm";
 import { format } from "date-fns";
 
+export const dynamic = "force-dynamic";
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
@@ -90,7 +92,7 @@ export default async function ProfilePage({ params }: PageProps) {
                 <p className="text-sm text-product-charcoal/60 font-source-sans mb-4">{user.bio}</p>
               )}
               <div className="flex flex-wrap items-center gap-4">
-                <TrustBadge trustScore={user.trustScore} />
+                <TrustBadge trustScore={user.trustScore} reviewCount={reviews.length} isVerified={user.isVerified} />
                 <span className="text-sm text-product-charcoal/40 font-source-sans">{trustLevel}</span>
               </div>
             </div>

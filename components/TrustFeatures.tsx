@@ -1,6 +1,6 @@
 const features = [
   {
-    title: "Government ID Proofing",
+    title: "Government ID Verification",
     description:
       "Every member verifies their identity with a government-issued ID plus proof of address. Your personal information is never shared — we only confirm you're a real resident.",
     icon: (
@@ -14,7 +14,7 @@ const features = [
   {
     title: "2-Mile Hyperlocal Radius",
     description:
-      "Listings are only visible within a 2-mile radius of your verified address. Buy and sell with people you might actually run into at the grocery store.",
+      "Listings are only visible within a 2-mile radius of your verified address. Buy and sell with people you might run into at the grocery store.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
@@ -23,7 +23,7 @@ const features = [
     ),
   },
   {
-    title: "Neighborhood Verified Badges",
+    title: "Neighborhood Badges",
     description:
       "Once verified, you earn a Neighborhood Badge — a visible trust marker. Badges build your reputation and show neighbors you're the real deal.",
     icon: (
@@ -36,7 +36,7 @@ const features = [
   {
     title: "Secure In-App Messaging",
     description:
-      "Chat with buyers and sellers directly in NearBy. No need to share your phone number or personal contact info until you're ready to meet in person.",
+      "Chat with buyers and sellers directly in NearBy. No need to share your phone number or personal contact info until you're ready to meet.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -48,44 +48,44 @@ const features = [
 
 export default function TrustFeatures() {
   return (
-    <section className="py-24 px-6 bg-[#030712]">
+    <section id="trust-safety" className="py-24 px-6 bg-warm-white">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#EC4899] mb-4 block"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-coral mb-4 block"
+            style={{ fontFamily: "'Manrope', sans-serif" }}
           >
             Trust & Safety
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#F9FAFB] text-balance"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            className="text-3xl md:text-4xl font-bold text-product-charcoal text-balance"
+            style={{ fontFamily: "'Manrope', sans-serif" }}
           >
             Built on Real Trust, Not Anonymity
           </h2>
-          <div className="w-12 h-[2px] bg-[#EC4899]/40 mx-auto mt-6" />
+          <div className="w-12 h-[2px] bg-coral/30 mx-auto mt-6" />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="group rounded-2xl border border-[#1F2937] bg-[#111827] p-7 hover:border-[#00C8A0]/20 transition-all duration-300"
+              className="group rounded-2xl border border-stone-100 bg-white p-7 hover:border-violet/20 hover:shadow-sm transition-all duration-300"
             >
               <div className="flex items-start gap-5">
-                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#1F2937] border border-[#00C8A0]/10 flex items-center justify-center text-[#00C8A0] group-hover:border-[#00C8A0]/30 transition-colors duration-300">
+                <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-violet/5 border border-violet/10 flex items-center justify-center text-violet group-hover:bg-violet/10 transition-colors duration-300">
                   {feature.icon}
                 </div>
                 <div>
                   <h3
-                    className="text-lg font-semibold text-[#F9FAFB] mb-2"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    className="text-lg font-semibold text-product-charcoal mb-2"
+                    style={{ fontFamily: "'Manrope', sans-serif" }}
                   >
                     {feature.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed text-[#9CA3AF]"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    className="text-sm leading-relaxed text-product-charcoal/55"
+                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
                     {feature.description}
                   </p>

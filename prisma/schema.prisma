@@ -3,77 +3,67 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
   url      = env("DATABASE_URL")
 }
 
-enum Category {
-  ELECTRONICS
-  FURNITURE
-  CLOTHING
-  BABY_GEAR
-  SPORTS
-  BOOKS
-  HOME_GARDEN
-  TOYS
-  VEHICLES
-  OTHER
-}
-
-enum Condition {
-  NEW
-  LIKE_NEW
-  GOOD
-  FAIR
-}
-
-enum ListingStatus {
-  ACTIVE
-  SOLD
-  REMOVED
-}
-
 model User {
-  id           String    @id @default(cuid())
-  email        String    @unique
+  id           String   @id @default(cuid())
+  email        String   @unique
   name         String
   passwordHash String
-  neighborhood String    @default("")
+  neighborhood String   @default("")
   latitude     Float?
   longitude    Float?
   avatarUrl    String?
   bio          String?
-  trustScore   Int       @default(0)
-  isVerified   Boolean   @default(false)
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
+  trustScore   Int      @default(0)
+  isVerified   Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  listings      Listing[]  @relation("SellerListings")
-  reviewsGiven  Review[]   @relation("Reviewer")
-  reviewsReceived Review[] @relation("Reviewed")
-  favorites     Favorite[]
+  listings        Listing[]  @relation("SellerListings")
+  reviewsGiven    Review[]   @relation("Reviewer")
+  reviewsReceived Review[]   @relation("Reviewed")
+  favorites       Favorite[]
+  messagesSent    Message[]   @relation("Sender")
+  messagesReceived    Message[]   @relation("Receiver")
 }
 
 model Listing {
-  id           String        @id @default(cuid())
+  id           String   @id @default(cuid())
   title        String
   description  String
-  price        Decimal       @db.Decimal(10, 2)
-  category     Category
-  condition    Condition     @default(GOOD)
+  price        Float
+  category     String
+  condition    String   @default("GOOD")
   imageUrl     String?
-  imageUrls    String[]
+  imageUrls    String   @default("[]")
   neighborhood String
   latitude     Float?
   longitude    Float?
   sellerId     String
-  seller       User          @relation("SellerListings", fields: [sellerId], references: [id])
-  status       ListingStatus @default(ACTIVE)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  seller       User     @relation("SellerListings", fields: [sellerId], references: [id])
+  status       String   @default("ACTIVE")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   reviews   Review[]
   favorites Favorite[]
+  messages  Message[]
+}
+
+model Message {
+  id         String   @id @default(cuid())
+  content    String
+  read       Boolean  @default(false)
+  senderId   String
+  sender     User     @relation("Sender", fields: [senderId], references: [id])
+  receiverId String
+  receiver   User     @relation("Receiver", fields: [receiverId], references: [id])
+  listingId  String?
+  listing    Listing? @relation(fields: [listingId], references: [id])
+  createdAt  DateTime @default(now())
 }
 
 model Review {
