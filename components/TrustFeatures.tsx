@@ -48,7 +48,7 @@ const features = [
 
 export default function TrustFeatures() {
   return (
-    <section className="py-24 px-6 bg-[#030712]">
+    <section id="trust-safety" className="py-24 px-6 bg-[#030712]">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span
