@@ -2,7 +2,10 @@
 const nextConfig = {
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true },
-  webpack: (config, { webpack }) => {
+  experimental: {
+    workerThreads: false,
+  },
+  webpack: (config) => {
     config.cache = false;
     return config;
   },
