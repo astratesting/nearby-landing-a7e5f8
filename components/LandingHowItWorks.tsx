@@ -40,7 +40,7 @@ const steps = [
 
 export default function LandingHowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-6 bg-[#111827]">
+    <section className="py-24 px-6 bg-[#111827]">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span

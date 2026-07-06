@@ -3,8 +3,8 @@ import { db } from "@/lib/db";
 import ListingCard from "@/components/ListingCard";
 import FilterBar from "@/components/FilterBar";
 import Link from "next/link";
-
-const VALID_CATEGORIES = ["ELECTRONICS", "FURNITURE", "CLOTHING", "BABY_GEAR", "SPORTS", "BOOKS", "HOME_GARDEN", "TOYS", "VEHICLES", "OTHER"];
+import { redirect } from "next/navigation";
+import { Category } from "@prisma/client";
 
 interface PageProps {
   searchParams: Promise<{ category?: string; search?: string; neighborhood?: string; sort?: string }>;
@@ -16,16 +16,16 @@ export default async function BrowsePage({ searchParams }: PageProps) {
   const { category, search, neighborhood, sort } = params;
 
   const where: any = { status: "ACTIVE" };
-  if (category && VALID_CATEGORIES.includes(category)) {
-    where.category = category;
+  if (category && Object.keys(Category).includes(category)) {
+    where.category = category as Category;
   }
   if (neighborhood) {
-    where.neighborhood = { contains: neighborhood };
+    where.neighborhood = { contains: neighborhood, mode: "insensitive" };
   }
   if (search) {
     where.OR = [
-      { title: { contains: search } },
-      { description: { contains: search } },
+      { title: { contains: search, mode: "insensitive" } },
+      { description: { contains: search, mode: "insensitive" } },
     ];
   }
 
@@ -44,11 +44,11 @@ export default async function BrowsePage({ searchParams }: PageProps) {
     db.listing.findMany({
       where: { status: "ACTIVE" },
       select: { neighborhood: true },
-      take: 100,
+      distinct: ["neighborhood"],
     }),
   ]);
 
-  const uniqueNeighborhoods = Array.from(new Set(neighborhoods.map((n) => n.neighborhood))).filter(Boolean);
+  const uniqueNeighborhoods = neighborhoods.map((n) => n.neighborhood).filter(Boolean);
 
   return (
     <div className="min-h-screen bg-warm-white">

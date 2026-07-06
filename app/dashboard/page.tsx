@@ -3,13 +3,25 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import ListingCard from "@/components/ListingCard";
 import FilterBar from "@/components/FilterBar";
+import { Category } from "@prisma/client";
 import { redirect } from "next/navigation";
-
-const VALID_CATEGORIES = ["ELECTRONICS", "FURNITURE", "CLOTHING", "BABY_GEAR", "SPORTS", "BOOKS", "HOME_GARDEN", "TOYS", "VEHICLES", "OTHER"];
 
 interface PageProps {
   searchParams: Promise<{ category?: string; search?: string; neighborhood?: string; sort?: string }>;
 }
+
+const CATEGORY_LABELS: Record<string, string> = {
+  ELECTRONICS: "Electronics",
+  FURNITURE: "Furniture",
+  CLOTHING: "Clothing",
+  BABY_GEAR: "Baby Gear",
+  SPORTS: "Sports",
+  BOOKS: "Books",
+  HOME_GARDEN: "Home & Garden",
+  TOYS: "Toys",
+  VEHICLES: "Vehicles",
+  OTHER: "Other",
+};
 
 export default async function DashboardPage({ searchParams }: PageProps) {
   const session = await auth();
@@ -19,16 +31,16 @@ export default async function DashboardPage({ searchParams }: PageProps) {
   const { category, search, neighborhood, sort } = params;
 
   const where: any = { status: "ACTIVE" };
-  if (category && VALID_CATEGORIES.includes(category)) {
-    where.category = category;
+  if (category && Object.keys(Category).includes(category)) {
+    where.category = category as Category;
   }
   if (neighborhood) {
-    where.neighborhood = { contains: neighborhood };
+    where.neighborhood = { contains: neighborhood, mode: "insensitive" };
   }
   if (search) {
     where.OR = [
-      { title: { contains: search } },
-      { description: { contains: search } },
+      { title: { contains: search, mode: "insensitive" } },
+      { description: { contains: search, mode: "insensitive" } },
     ];
   }
 
@@ -47,12 +59,12 @@ export default async function DashboardPage({ searchParams }: PageProps) {
     db.listing.findMany({
       where: { status: "ACTIVE" },
       select: { neighborhood: true },
-      take: 100,
+      distinct: ["neighborhood"],
     }),
     db.user.findUnique({ where: { id: session.user.id } }),
   ]);
 
-  const uniqueNeighborhoods = Array.from(new Set(neighborhoods.map((n) => n.neighborhood))).filter(Boolean);
+  const uniqueNeighborhoods = neighborhoods.map((n) => n.neighborhood).filter(Boolean);
 
   return (
     <div className="min-h-screen bg-warm-white">
