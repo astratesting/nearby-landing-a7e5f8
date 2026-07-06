@@ -48,44 +48,44 @@ const benefits = [
 
 export default function Benefits() {
   return (
-    <section className="py-24 px-6 bg-[#111827]">
+    <section className="py-24 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <div className="text-center mb-16">
           <span
-            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#EC4899] mb-4 block"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            className="text-[11px] font-semibold tracking-[0.2em] uppercase text-violet mb-4 block"
+            style={{ fontFamily: "'Manrope', sans-serif" }}
           >
             Why NearBy
           </span>
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#F9FAFB] text-balance"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+            className="text-3xl md:text-4xl font-bold text-product-charcoal text-balance"
+            style={{ fontFamily: "'Manrope', sans-serif" }}
           >
             A Marketplace You Can Actually Trust
           </h2>
-          <div className="w-12 h-[2px] bg-[#EC4899]/40 mx-auto mt-6" />
+          <div className="w-12 h-[2px] bg-violet/30 mx-auto mt-6" />
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {benefits.map((b) => (
             <div
               key={b.title}
-              className="group rounded-2xl border border-[#1F2937] bg-[#030712] p-7 hover:border-[#00C8A0]/20 transition-all duration-300"
+              className="group rounded-2xl border border-stone-100 bg-warm-white p-7 hover:border-violet/20 hover:shadow-sm transition-all duration-300"
             >
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-[#1F2937] border border-[#00C8A0]/10 flex items-center justify-center text-[#00C8A0] group-hover:border-[#00C8A0]/30 transition-colors">
+                <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-violet/5 border border-violet/10 flex items-center justify-center text-violet group-hover:bg-violet/10 transition-colors">
                   {b.icon}
                 </div>
                 <div>
                   <h3
-                    className="text-lg font-semibold text-[#F9FAFB] mb-2"
-                    style={{ fontFamily: "'Space Grotesk', sans-serif" }}
+                    className="text-lg font-semibold text-product-charcoal mb-2"
+                    style={{ fontFamily: "'Manrope', sans-serif" }}
                   >
                     {b.title}
                   </h3>
                   <p
-                    className="text-sm leading-relaxed text-[#9CA3AF]"
-                    style={{ fontFamily: "'DM Sans', sans-serif" }}
+                    className="text-sm leading-relaxed text-product-charcoal/55"
+                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
                     {b.description}
                   </p>

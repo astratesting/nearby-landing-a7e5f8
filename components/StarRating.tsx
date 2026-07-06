@@ -23,7 +23,7 @@ export default function StarRating({ rating, onChange, size = "md" }: StarRating
           key={star}
           className={`${sizeClass} ${interactive ? "transition-transform hover:scale-110" : ""}`}
           viewBox="0 0 24 24"
-          fill={(hover || rating) >= star ? "#F59E0B" : "#E2E8F0"}
+          fill={(hover || rating) >= star ? "#FBBF24" : "#E2E8F0"}
           onClick={() => onChange?.(star)}
           onMouseEnter={() => interactive && setHover(star)}
           onMouseLeave={() => interactive && setHover(0)}
