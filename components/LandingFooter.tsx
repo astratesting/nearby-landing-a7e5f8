@@ -28,7 +28,7 @@ export default function LandingFooter() {
             <div className="flex flex-col gap-2 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               <a href="#" className="text-stone-400 hover:text-white transition-colors">Home</a>
               <a href="#waitlist" className="text-stone-400 hover:text-white transition-colors">Join Waitlist</a>
-              <a href="/app" className="text-stone-400 hover:text-white transition-colors">App</a>
+              <a href="/dashboard" className="text-stone-400 hover:text-white transition-colors">Browse</a>
               <a href="#" className="text-stone-400 hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="text-stone-400 hover:text-white transition-colors">Terms of Service</a>
             </div>

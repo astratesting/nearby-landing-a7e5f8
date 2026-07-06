@@ -87,7 +87,7 @@ export default function FilterBar({
               updateFilters({ search: (e.target as HTMLInputElement).value });
             }
           }}
-          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#FBBF24]/10 bg-white text-sm text-[#1F2937] placeholder:text-[#1F2937]/30 focus:outline-none focus:border-violet/30 focus:ring-2 focus:ring-violet/10 transition-all"
+          className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-[#F59E0B]/10 bg-white text-sm text-[#1F2937] placeholder:text-[#1F2937]/30 focus:outline-none focus:border-violet/30 focus:ring-2 focus:ring-violet/10 transition-all"
           style={{ fontFamily: "'Source Sans 3', sans-serif" }}
         />
       </div>
@@ -101,7 +101,7 @@ export default function FilterBar({
             className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
               (cat.value === "" && !initialCategory) || initialCategory === cat.value
                 ? "bg-violet text-white"
-                : "bg-white border border-[#FBBF24]/10 text-[#1F2937]/60 hover:border-violet/30 hover:text-violet"
+                : "bg-white border border-[#F59E0B]/10 text-[#1F2937]/60 hover:border-violet/30 hover:text-violet"
             }`}
             style={{ fontFamily: "'Manrope', sans-serif" }}
           >
@@ -115,7 +115,7 @@ export default function FilterBar({
         <select
           value={initialSort}
           onChange={(e) => updateFilters({ sort: e.target.value })}
-          className="px-3 py-2 rounded-xl border border-[#FBBF24]/10 bg-white text-sm text-[#1F2937] focus:outline-none focus:border-violet/30 transition-all"
+          className="px-3 py-2 rounded-xl border border-[#F59E0B]/10 bg-white text-sm text-[#1F2937] focus:outline-none focus:border-violet/30 transition-all"
           style={{ fontFamily: "'Source Sans 3', sans-serif" }}
         >
           {SORT_OPTIONS.map((opt) => (
@@ -129,7 +129,7 @@ export default function FilterBar({
           <select
             value={initialNeighborhood}
             onChange={(e) => updateFilters({ neighborhood: e.target.value })}
-            className="px-3 py-2 rounded-xl border border-[#FBBF24]/10 bg-white text-sm text-[#1F2937] focus:outline-none focus:border-violet/30 transition-all"
+            className="px-3 py-2 rounded-xl border border-[#F59E0B]/10 bg-white text-sm text-[#1F2937] focus:outline-none focus:border-violet/30 transition-all"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
             <option value="">All neighborhoods</option>

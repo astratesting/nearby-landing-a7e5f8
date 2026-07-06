@@ -7,10 +7,10 @@ async function main() {
   const hash = await bcrypt.hash("demo123", 10);
 
   const demoUser = await prisma.user.upsert({
-    where: { email: "demo@demo.app" },
+    where: { email: "demo@nearby.com" },
     update: {},
     create: {
-      email: "demo@demo.app",
+      email: "demo@nearby.com",
       name: "Jordan Rivera",
       passwordHash: hash,
       neighborhood: "Bushwick",
@@ -20,12 +20,12 @@ async function main() {
     },
   });
 
-  const alice = await prisma.user.upsert({
-    where: { email: "alice@example.com" },
+  const sarah = await prisma.user.upsert({
+    where: { email: "sarah@example.com" },
     update: {},
     create: {
-      email: "alice@example.com",
-      name: "Alice Chen",
+      email: "sarah@example.com",
+      name: "Sarah Chen",
       passwordHash: hash,
       neighborhood: "Williamsburg",
       bio: "Mom of two, always decluttering. Baby gear and toys coming soon!",
@@ -65,7 +65,7 @@ async function main() {
   const listings = await Promise.all([
     prisma.listing.create({
       data: {
-        sellerId: alice.id,
+        sellerId: sarah.id,
         title: "Walnut bookshelf, mid-century",
         description: "Solid walnut bookshelf in great condition. 6 shelves, holds plenty. Moving sale — must go this weekend. Sturdy and beautiful. Minor scuff on bottom shelf.",
         price: 120,
@@ -76,7 +76,7 @@ async function main() {
     }),
     prisma.listing.create({
       data: {
-        sellerId: alice.id,
+        sellerId: sarah.id,
         title: "Sony WH-1000XM5 headphones",
         description: "Barely used noise-cancelling headphones. Comes with original case and cables. Bought last month, realized I prefer earbuds.",
         price: 220,
@@ -168,7 +168,7 @@ async function main() {
         rating: 4,
         comment: "Headphones work great. Seller was responsive and friendly.",
         reviewerId: priya.id,
-        reviewedId: alice.id,
+        reviewedId: sarah.id,
         listingId: listings[1].id,
       },
     }),
@@ -185,7 +185,7 @@ async function main() {
       data: {
         rating: 5,
         comment: "Beautiful bookshelf. Jordan was a pleasure to work with.",
-        reviewerId: alice.id,
+        reviewerId: sarah.id,
         reviewedId: demoUser.id,
         listingId: listings[5].id,
       },
@@ -202,7 +202,7 @@ async function main() {
   ]);
 
   console.log("Seed complete. Created:");
-  console.log(`  Users: ${[demoUser, alice, marco, priya].length}`);
+  console.log(`  Users: ${[demoUser, sarah, marco, priya].length}`);
   console.log(`  Listings: ${listings.length}`);
   console.log(`  Reviews: 5`);
 }

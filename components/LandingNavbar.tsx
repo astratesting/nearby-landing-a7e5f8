@@ -11,7 +11,7 @@ export default function LandingNavbar() {
           <a href="#how-it-works" className="text-stone-500 hover:text-product-charcoal transition-colors">How It Works</a>
           <a href="#trust-safety" className="text-stone-500 hover:text-product-charcoal transition-colors">Trust & Safety</a>
           <a href="#testimonials" className="text-stone-500 hover:text-product-charcoal transition-colors">Testimonials</a>
-          <a href="/app" className="text-stone-500 hover:text-product-charcoal transition-colors">App</a>
+          <a href="/dashboard" className="text-stone-500 hover:text-product-charcoal transition-colors">Browse</a>
           <a
             href="#waitlist"
             className="px-4 py-2 rounded-full bg-violet text-white font-medium hover:bg-violet/90 transition-all duration-200"
