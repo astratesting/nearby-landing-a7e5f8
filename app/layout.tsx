@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Providers from "@/components/Providers";
-import NavbarWrapper from "@/components/NavbarWrapper";
+import NavbarWrapper from "@/components/ShowOnNonLanding";
 import Navbar from "@/components/Navbar";
 import { Analytics } from "@vercel/analytics/react";
 import { Manrope, Source_Sans_3 } from "next/font/google";

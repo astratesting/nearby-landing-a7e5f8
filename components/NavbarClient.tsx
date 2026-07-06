@@ -3,46 +3,29 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 export default function NavbarClient() {
   const { data: session } = useSession();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [unreadCount, setUnreadCount] = useState(0);
 
-  const isAppPage =
+  const isDashboard =
     pathname.startsWith("/dashboard") ||
     pathname.startsWith("/listings") ||
-    pathname.startsWith("/profile") ||
-    pathname.startsWith("/browse") ||
-    pathname.startsWith("/messages");
-
-  useEffect(() => {
-    if (session?.user?.id && isAppPage) {
-      let interval: ReturnType<typeof setInterval>;
-      async function fetchUnread() {
-        try {
-          const res = await fetch("/api/messages");
-          const data = await res.json();
-          if (Array.isArray(data)) {
-            const count = data.reduce((sum: number, c: any) => sum + (c.unreadCount || 0), 0);
-            setUnreadCount(count);
-          }
-        } catch {}
-      }
-      fetchUnread();
-      interval = setInterval(fetchUnread, 30000);
-      return () => clearInterval(interval);
-    }
-  }, [session, isAppPage]);
+    pathname.startsWith("/profile");
 
   async function handleSignOut() {
     await signOut({ callbackUrl: "/" });
   }
 
-  // App pages navbar
-  if (isAppPage) {
+  const navLinks = [
+    { href: "/dashboard", label: "Browse" },
+    { href: "/listings/new", label: "Sell" },
+  ];
+
+  // Dashboard/product navbar (on product pages)
+  if (isDashboard) {
     return (
       <nav className="sticky top-0 z-50 bg-warm-white/95 backdrop-blur border-b border-product-charcoal/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
@@ -51,29 +34,23 @@ export default function NavbarClient() {
           </Link>
 
           <div className="hidden md:flex items-center gap-5 text-sm font-manrope">
-            <Link href="/dashboard" className={`transition-colors duration-150 ${pathname.startsWith("/dashboard") ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"}`}>
-              Browse
-            </Link>
-            <Link href="/dashboard?tab=my" className={`transition-colors duration-150 ${pathname.includes("tab=my") ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"}`}>
-              My Listings
-            </Link>
-            <Link href="/listings/new" className={`transition-colors duration-150 ${pathname === "/listings/new" ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"}`}>
-              Sell
-            </Link>
-            <Link href="/messages" className={`relative transition-colors duration-150 ${pathname.startsWith("/messages") ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"}`}>
-              Messages
-              {unreadCount > 0 && (
-                <span className="absolute -top-2 -right-4 w-4.5 h-4.5 rounded-full bg-coral text-white text-[10px] font-bold flex items-center justify-center">
-                  {unreadCount > 9 ? "9+" : unreadCount}
-                </span>
-              )}
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`transition-colors duration-150 ${
+                  pathname.startsWith(link.href) ? "text-violet font-semibold" : "text-product-charcoal/60 hover:text-product-charcoal"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
             {session?.user ? (
               <>
                 <Link href={`/profile/${session.user.id}`} className="text-product-charcoal/60 hover:text-product-charcoal transition-colors">
-                  {session.user.name?.split(" ")[0]}
+                  Profile
                 </Link>
-                <button onClick={handleSignOut} className="text-product-charcoal/40 hover:text-coral transition-colors">
+                <button onClick={handleSignOut} className="text-product-charcoal/40 hover:text-product-charcoal transition-colors">
                   Sign out
                 </button>
               </>
@@ -102,18 +79,12 @@ export default function NavbarClient() {
 
         {mobileOpen && (
           <div className="md:hidden bg-white border-t border-product-charcoal/5 px-4 pb-4">
-            <Link href="/dashboard" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
-              Browse
-            </Link>
-            <Link href="/dashboard?tab=my" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
-              My Listings
-            </Link>
-            <Link href="/listings/new" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
-              Sell
-            </Link>
-            <Link href="/messages" onClick={() => setMobileOpen(false)} className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
-              Messages {unreadCount > 0 && `(${unreadCount})`}
-            </Link>
+            {navLinks.map((link) => (
+              <Link key={link.href} href={link.href} onClick={() => setMobileOpen(false)}
+                className="block py-2.5 text-sm font-manrope text-product-charcoal/70 hover:text-violet transition-colors">
+                {link.label}
+              </Link>
+            ))}
             {session?.user ? (
               <>
                 <Link href={`/profile/${session.user.id}`} onClick={() => setMobileOpen(false)}
@@ -121,7 +92,7 @@ export default function NavbarClient() {
                   Profile
                 </Link>
                 <button onClick={() => { handleSignOut(); setMobileOpen(false); }}
-                  className="block py-2.5 text-sm text-product-charcoal/40 hover:text-coral">
+                  className="block py-2.5 text-sm text-product-charcoal/40 hover:text-product-charcoal">
                   Sign out
                 </button>
               </>
@@ -143,7 +114,7 @@ export default function NavbarClient() {
     );
   }
 
-  // Landing page navbar
+  // Default (landing page context — mostly not shown due to NavbarWrapper)
   return (
     <nav className="sticky top-0 z-50 bg-ivory/95 backdrop-blur border-b border-charcoal/5">
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -154,13 +125,7 @@ export default function NavbarClient() {
           {session?.user ? (
             <>
               <Link href="/dashboard" className="text-charcoal/70 hover:text-charcoal transition-colors">
-                Browse
-              </Link>
-              <Link href="/listings/new" className="text-charcoal/70 hover:text-charcoal transition-colors">
-                Sell
-              </Link>
-              <Link href={`/profile/${session.user.id}`} className="text-charcoal/70 hover:text-charcoal transition-colors">
-                {session.user.name?.split(" ")[0]}
+                Dashboard
               </Link>
               <button onClick={handleSignOut} className="text-charcoal/50 hover:text-charcoal transition-colors">
                 Sign out
