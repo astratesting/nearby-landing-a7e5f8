@@ -2,26 +2,19 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#030712] text-[#F9FAFB] px-6">
-      <span
-        className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#EC4899] mb-6"
-        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-      >
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", background: "#FFF8F0", padding: "24px", fontFamily: "system-ui, sans-serif" }}>
+      <span style={{ fontSize: "14px", fontWeight: 600, letterSpacing: "0.1em", textTransform: "uppercase", color: "#7C3AED", marginBottom: "16px" }}>
         404
       </span>
-      <h1
-        className="text-4xl md:text-5xl font-bold mb-4 text-center"
-        style={{ fontFamily: "'Space Grotesk', sans-serif" }}
-      >
+      <h1 style={{ fontSize: "30px", fontWeight: 700, color: "#1F2937", marginBottom: "12px" }}>
         Page Not Found
       </h1>
-      <p className="text-[#9CA3AF] mb-8 text-center max-w-md" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-        This page doesn't exist. Maybe it moved, or maybe it was never here.
+      <p style={{ color: "#6B7280", marginBottom: "32px", textAlign: "center", maxWidth: "400px" }}>
+        The page you're looking for doesn't exist.
       </p>
       <Link
         href="/"
-        className="px-6 py-3 rounded-full bg-gradient-to-r from-[#00C8A0] to-[#EC4899] text-[#030712] text-sm font-semibold hover:shadow-lg hover:shadow-[#00C8A0]/20 transition-all"
-        style={{ fontFamily: "'DM Sans', sans-serif" }}
+        style={{ padding: "12px 24px", borderRadius: "12px", background: "#7C3AED", color: "#FFFFFF", fontSize: "14px", fontWeight: 600, textDecoration: "none" }}
       >
         Go Home
       </Link>
